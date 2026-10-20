@@ -8,7 +8,7 @@ The visual direction combines Byotone's changing open field, Purdue Hackers' dir
 
 The palette uses deep purple (`#171225`) as the field, lavender (`#cfb9ff`) for emphasis, and blue (`#86b8ff`) for accents. Space Grotesk is the minimal primary face; Amazon Ember Mono is used for navigation and metadata. Preserve the short centered Home sections, generous spacing, and visible field rather than adding opaque hero panels or more promotional headings.
 
-The approved Home hero has one “Come build with us” action. It has no cloud illustration, numbered section navigation, or motion toggle. Four decorative sketches belong in the lower Home sections. The notebook belongs only on Grants; the separate cloud belongs on Events. Original image prompts and provenance are in [the sketch asset record](src/assets/sketches/README.md).
+The approved Home hero has one “Come build with us” action. It has no cloud illustration, numbered section navigation, or motion toggle. Three decorative sketches (cat, robot, and lamp) belong in the lower Home sections. The notebook belongs only on Grants; the separate cloud belongs on Events. Original image prompts and provenance are in [the sketch asset record](src/assets/sketches/README.md).
 
 The large abstract community-photo placeholder belongs only to Home. Events, Blogs, Grants, and article pages have a compact footer. Both footers include the provided GitHub and Discord destinations. The Blogs artwork remains a square FIELD NOTES composition.
 

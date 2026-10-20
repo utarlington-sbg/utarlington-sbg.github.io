@@ -24,7 +24,7 @@ for (const width of [1440, 768, 390, 320]) {
         await expect(page.locator('.home-section')).toHaveCount(3);
         await expect(page.locator('.home-section').first()).toHaveCSS('position', 'relative');
         await expect(page.locator('.home-copy').first()).toHaveCSS('text-align', 'center');
-        await expect(page.locator('.margin-sketch')).toHaveCount(4);
+        await expect(page.locator('.margin-sketch')).toHaveCount(3);
         const sketchBounds = await page.locator('.margin-sketch').evaluateAll(sketches => sketches.map(sketch => {
           const section = sketch.closest('.home-section');
           const box = sketch.getBoundingClientRect();

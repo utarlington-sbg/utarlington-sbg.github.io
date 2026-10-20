@@ -6,7 +6,7 @@ Created October 19, 2026 using built-in image generation with transparent backgr
 | --- | --- |
 | `ethernet-cat.png` | Home / Gather |
 | `disk-crane.png` | Retained source asset; no longer displayed on Home |
-| `cloud-tinkerer.png` | Home / Build, both sketch positions |
+| `cloud-tinkerer.png` | Home / Build, left position formerly occupied by the crane |
 | `circuit-lamp.png` | Home / Read |
 | `cloud-cable.png` | Events heading |
 | `notebook-sprout.png` | Grants |

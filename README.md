@@ -27,7 +27,7 @@ Run `npm run build` before browser tests. `npm test` runs both test suites. CI c
 
 ## Pages and design
 
-- `/`: approved Home, four original sketches, particle field, and Home-only photo placeholder footer.
+- `/`: approved Home, three original sketches, particle field, and Home-only photo placeholder footer.
 - `/events/`: upcoming events, an honest empty state, and the three existing Meetup archive entries.
 - `/blog/`: square FIELD NOTES artwork and published/sample posts.
 - `/blog/[id]/`: shareable article pages. Drafts generate no page; samples are labeled and excluded from indexing.
