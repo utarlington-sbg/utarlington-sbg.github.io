@@ -70,8 +70,21 @@ test('navigation uses real routes and the article has its own URL', async ({ pag
 test('navigation hides on downward scroll, returns upward, and is available to keyboards', async ({ page }) => {
   await page.goto('/');
   await page.mouse.move(300, 300);
-  await page.mouse.wheel(0, 500);
+  const exitVisibility = await page.evaluate(() => new Promise<string>(resolve => {
+    const header = document.querySelector('[data-header]');
+    if (!header) throw new Error('Navigation header is missing');
+    const observer = new MutationObserver(() => {
+      if (header.classList.contains('scroll-hidden')) {
+        observer.disconnect();
+        resolve(getComputedStyle(header).visibility);
+      }
+    });
+    observer.observe(header, { attributes: true, attributeFilter: ['class'] });
+    window.scrollTo({ top: 500, behavior: 'instant' });
+  }));
+  expect(exitVisibility).toBe('visible');
   await expect(page.locator('.header')).toHaveClass(/scroll-hidden/);
+  await expect(page.locator('.header')).toHaveCSS('visibility', 'hidden');
   await page.mouse.wheel(0, -160);
   await expect(page.locator('.header')).not.toHaveClass(/scroll-hidden/);
   await page.mouse.wheel(0, 250);
