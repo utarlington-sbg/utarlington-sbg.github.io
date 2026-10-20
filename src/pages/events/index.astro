@@ -1,4 +1,5 @@
 ---
+import { sitePath } from '../../lib/paths';
 import { getCollection } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import Sketch from '../../components/Sketch.astro';
@@ -21,13 +22,13 @@ const { upcoming, past } = groupEvents(await getCollection('events'));
       ) : (
         <section class="upcoming-events" aria-labelledby="next-event-title">
           <h2 id="next-event-title">Coming up</h2>
-          {upcoming.map(event => <a class="history-row" href={`/events/${event.id}/`}><div><h3>{event.data.title}</h3>{event.data.kind === 'scheduled' && <p><time datetime={event.data.startsAt}>{formatEventDate(event.data.startsAt)}</time> · {event.data.location}</p>}</div><span>Details ↗</span></a>)}
+          {upcoming.map(event => <a class="history-row" href={sitePath(`/events/${event.id}/`)}><div><h3>{event.data.title}</h3>{event.data.kind === 'scheduled' && <p><time datetime={event.data.startsAt}>{formatEventDate(event.data.startsAt)}</time> · {event.data.location}</p>}</div><span>Details ↗</span></a>)}
         </section>
       )}
       {past.length > 0 && (
         <section class="event-history" aria-labelledby="past-events-title">
           <h2 id="past-events-title">Past events</h2>
-          {past.map(event => <a class="history-row" href={event.data.kind === 'archive' ? event.data.rsvp : `/events/${event.id}/`}><h3>{event.data.title}</h3><span>{event.data.kind === 'archive' ? 'Meetup' : 'Details'} ↗</span></a>)}
+          {past.map(event => <a class="history-row" href={event.data.kind === 'archive' ? event.data.rsvp : sitePath(`/events/${event.id}/`)}><h3>{event.data.title}</h3><span>{event.data.kind === 'archive' ? 'Meetup' : 'Details'} ↗</span></a>)}
         </section>
       )}
     </div>

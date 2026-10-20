@@ -1,5 +1,8 @@
+---
+import { sitePath } from '../lib/paths';
+---
 <div class="open-field" data-open-field aria-hidden="true">
-  <img class="open-field-fallback" src="/art/open-field-clear.svg" alt="" width="1300" height="840" fetchpriority="high" decoding="async" />
+  <img class="open-field-fallback" src={sitePath('/art/open-field-clear.svg')} alt="" width="1300" height="840" fetchpriority="high" decoding="async" />
   <canvas class="open-field-canvas"></canvas>
 </div>
 

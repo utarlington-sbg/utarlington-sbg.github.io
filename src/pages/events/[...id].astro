@@ -1,4 +1,5 @@
 ---
+import { sitePath } from '../../lib/paths';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { eventPhase, formatEventDate } from '../../lib/events';
@@ -12,7 +13,7 @@ const { Content } = await render(event);
 ---
 <SiteLayout title={event.data.title} description={`Join AWS student builders at UT Arlington for ${event.data.title}.`}>
   <article class="reading-page">
-    <a class="text-link reading-back" href="/events/">← All events</a>
+    <a class="text-link reading-back" href={sitePath('/events/')}>← All events</a>
     <header><div class="eyebrow">{eventPhase(event.data) === 'past' ? 'PAST EVENT' : 'UPCOMING EVENT'}</div><h1>{event.data.title}</h1>
       {event.data.kind === 'scheduled' && <p class="event-detail-facts"><time datetime={event.data.startsAt}>{formatEventDate(event.data.startsAt)}</time><br />{event.data.location}</p>}
     </header>
