@@ -1,8 +1,13 @@
-name: Verify website
+name: Verify and publish website
 
 on:
   push:
   pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 permissions:
   contents: read
@@ -29,8 +34,32 @@ jobs:
       - run: npm test
         env:
           DEBUG: pw:webserver
+      - name: Package verified GitHub Pages build
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && matrix.base_path == '/website/'
+        uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          path: dist
       - uses: actions/upload-artifact@v7.0.2
         if: failure()
         with:
           name: browser-test-results-${{ strategy.job-index }}
           path: test-results/
+
+  deploy:
+    name: Publish GitHub Pages
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6.0.0
+      - name: Deploy verified artifact
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1
