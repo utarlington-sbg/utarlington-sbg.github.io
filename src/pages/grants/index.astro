@@ -1,0 +1,16 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Sketch from '../../components/Sketch.astro';
+import { site } from '../../data/site';
+import { grants } from '../../data/grants';
+---
+<SiteLayout title="Grants" description="Updates on future support and opportunities for student projects at UT Arlington.">
+  <section class="page interior-page">
+    <div class="page-heading"><h1>Grants</h1><p>Support for student ideas.</p></div>
+    <section class="grant-note" aria-labelledby="grant-status-title">
+      <Sketch name="notebook" class="grant-notebook" />
+      <h2 id="grant-status-title">{grants.heading}</h2><p>{grants.description}</p>
+      <a class="text-link" href={site.links.community}>Follow updates <span aria-hidden="true">↗</span></a>
+    </section>
+  </section>
+</SiteLayout>
