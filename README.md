@@ -97,7 +97,7 @@ Leaving `homePhoto: null` preserves the approved abstract placeholder. Other pag
 
 ## Build and host
 
-The public site is hosted at [utarlington-sbg.github.io/website/](https://utarlington-sbg.github.io/website/) using GitHub Pages. The GitHub Actions workflow checks types, builds, and runs content/browser tests at both `/` and `/website/`. On `main`, it uploads the exact tested `/website/` build and deploys it only after both variants pass. Pull requests and feature branches verify without publishing. No deployment secrets or external hosting account are required.
+The public site is hosted at [utarlington-sbg.github.io](https://utarlington-sbg.github.io/) using GitHub Pages. The GitHub Actions workflow checks types, builds, and runs content/browser tests at both `/` and `/website/`. On `main`, it uploads the exact tested `/` build and deploys it only after both variants pass. Pull requests and feature branches verify without publishing. No deployment secrets or external hosting account are required.
 
 Merge a reviewed PR into `main` to publish an update. To rebuild time-sensitive event state without a source change, run **Verify and publish website** from the Actions tab on `main`, or use:
 
@@ -105,16 +105,16 @@ Merge a reviewed PR into `main` to publish an update. To rebuild time-sensitive 
 gh workflow run ci.yml --ref main
 ```
 
-Production builds use `SITE_URL=https://utarlington-sbg.github.io` and `BASE_PATH=/website/`, configured in `.github/workflows/ci.yml`. The browser suite verifies canonical URLs, internal links, and actual public asset responses. Failed checks leave the existing deployment in place. The custom `404.html` is served by GitHub Pages for unknown project URLs.
+Production builds use `SITE_URL=https://utarlington-sbg.github.io` and `BASE_PATH=/`, configured in `.github/workflows/ci.yml`. The browser suite verifies canonical URLs, internal links, and actual public asset responses. Failed checks leave the existing deployment in place. The custom `404.html` is served by GitHub Pages for unknown URLs.
 
 To reproduce the deployed layout locally:
 
 ```sh
-BASE_PATH=/website/ SITE_URL=https://utarlington-sbg.github.io npm run build
-BASE_PATH=/website/ npm run preview
+BASE_PATH=/ SITE_URL=https://utarlington-sbg.github.io npm run build
+BASE_PATH=/ npm run preview
 ```
 
-Open `/website/` on the preview server. For an origin-root host, use `BASE_PATH=/` and set `SITE_URL` to that origin. A future custom domain requires updating Pages/DNS settings and the production origin, base, and artifact-selection condition in the workflow together. Static output remains in `dist/`; no API keys, database, or backend are needed.
+Open `/` on the preview server. The repository is named `utarlington-sbg.github.io` so GitHub Pages serves the organization root; its commit and PR history is preserved from the former `website` name. Existing clones can update with `git remote set-url origin https://github.com/utarlington-sbg/utarlington-sbg.github.io.git`. The former `/website/` landing redirects to `/`, including without JavaScript. For a project-path deployment, use `BASE_PATH=/website/` and update the artifact-selection condition to match. A future custom domain requires updating Pages/DNS settings and the production origin, base, and artifact-selection condition in the workflow together. Static output remains in `dist/`; no API keys, database, or backend are needed.
 
 ## Sources and assets
 
