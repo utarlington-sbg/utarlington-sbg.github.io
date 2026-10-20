@@ -5,8 +5,8 @@ Created October 19, 2026 using built-in image generation with transparent backgr
 | File | Placement |
 | --- | --- |
 | `ethernet-cat.png` | Home / Gather |
-| `disk-crane.png` | Home / Build |
-| `cloud-tinkerer.png` | Home / Build |
+| `disk-crane.png` | Retained source asset; no longer displayed on Home |
+| `cloud-tinkerer.png` | Home / Build, both sketch positions |
 | `circuit-lamp.png` | Home / Read |
 | `cloud-cable.png` | Events heading |
 | `notebook-sprout.png` | Grants |
