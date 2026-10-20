@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Sketch from '../../components/Sketch.astro';
+import { site } from '../../data/site';
+import { groupEvents, formatEventDate } from '../../lib/events';
+const { upcoming, past } = groupEvents(await getCollection('events'));
+---
+<SiteLayout title="Events" description="Workshops, projects, and time to build together with AWS student builders at UT Arlington.">
+  <section class="page interior-page">
+    <div class="page-heading">
+      <h1>Events</h1><p>Workshops, projects, and time to build together.</p>
+      <Sketch name="cloud" class="events-doodle" />
+    </div>
+    <div class="interior-content">
+      {upcoming.length === 0 ? (
+        <section class="events-notice" aria-labelledby="next-event-title">
+          <div><h2 id="next-event-title">Next meetup</h2><p>We’ll announce the next date on Meetup.</p></div>
+          <a class="text-link" href={site.links.meetup}>Check Meetup <span aria-hidden="true">↗</span></a>
+        </section>
+      ) : (
+        <section class="upcoming-events" aria-labelledby="next-event-title">
+          <h2 id="next-event-title">Coming up</h2>
+          {upcoming.map(event => <a class="history-row" href={`/events/${event.id}/`}><div><h3>{event.data.title}</h3>{event.data.kind === 'scheduled' && <p><time datetime={event.data.startsAt}>{formatEventDate(event.data.startsAt)}</time> · {event.data.location}</p>}</div><span>Details ↗</span></a>)}
+        </section>
+      )}
+      {past.length > 0 && (
+        <section class="event-history" aria-labelledby="past-events-title">
+          <h2 id="past-events-title">Past events</h2>
+          {past.map(event => <a class="history-row" href={event.data.kind === 'archive' ? event.data.rsvp : `/events/${event.id}/`}><h3>{event.data.title}</h3><span>{event.data.kind === 'archive' ? 'Meetup' : 'Details'} ↗</span></a>)}
+        </section>
+      )}
+    </div>
+  </section>
+</SiteLayout>
