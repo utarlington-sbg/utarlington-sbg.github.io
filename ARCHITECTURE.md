@@ -42,6 +42,8 @@ Run the commands in [README.md](README.md). Content tests cover schema validity,
 
 Motion tests inspect rendered pixels across all eight states, continuous motion, reduced motion and preference changes, Canvas 2D fallback, WebGL context loss, and final-state visibility at the footer. A renderer attribute alone does not prove the background is visible. The optional capture script writes galleries and recordings into ignored local research folders; it is not needed to serve the site.
 
+Playwright launches its preview with `--ignore-lock` to keep Astro in the foreground, including in agent environments that otherwise auto-background previews. Playwright must own the test-server lifecycle; an existing local preview must not substitute for a clean CI build.
+
 CI installs pinned npm dependencies, checks Astro/TypeScript, builds static pages, installs Chromium, and runs both test suites. Generated output, dependencies, environment secrets, reports, and local design research are ignored. Keep essential decisions in tracked documentation rather than linking to ignored screenshots or prototypes.
 
 Public hosting is not configured by this implementation. Before launch, supply the final domain and approved editorial/photo content as available. Space Grotesk's license is included under `public/fonts/`; Amazon Ember Mono comes from the supplied group asset kit.
