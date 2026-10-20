@@ -1,0 +1,40 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Sketch from '../components/Sketch.astro';
+import OpenField from '../components/OpenField.astro';
+import { site } from '../data/site';
+---
+<SiteLayout title="Home" home>
+<OpenField />
+<section class="page home-page" aria-label="Home">
+<section class="field-hero chapter" id="start" aria-labelledby="hero-title"><div class="hero-center"><div class="eyebrow"><span class="live-dot"></span> AWS STUDENT BUILDERS / UT ARLINGTON</div><h1 id="hero-title">A place for<br><em>unfinished ideas.</em></h1><p>Learn cloud. Make something.<br>Find the people who’ll figure it out with you.</p><div class="hero-actions"><a class="button lavender" href={site.links.meetup}>Come build with us <span>↗</span></a></div></div></section>
+<section class="home-section home-intro chapter" id="gather" aria-labelledby="gather-title">
+  <div class="home-doodles home-intro-doodles" aria-hidden="true">
+    <Sketch name="cat" class="home-cat" />
+  </div>
+  <div class="home-copy">
+    <h2 id="gather-title">Make things. Together.</h2>
+    <p>We’re UT Arlington students learning cloud, trying ideas, and helping each other build.</p>
+    <a class="text-link" href="/events/">See our events <span>↗</span></a>
+  </div>
+</section>
+<section class="home-section home-build chapter" id="build" aria-labelledby="build-title">
+  <div class="home-copy">
+    <h2 id="build-title">Bring a project.</h2>
+    <p>A question, a first attempt, or something halfway done. Work on it with other builders.</p>
+
+  </div>
+  <div class="home-doodles home-build-doodles" aria-hidden="true">
+    <Sketch name="crane" class="home-crane" />
+    <Sketch name="robot" class="home-robot" />
+  </div>
+</section>
+<section class="home-section home-journal chapter" id="read" aria-labelledby="read-title">
+  <div class="home-copy">
+    <h2 id="read-title">What we’re learning.</h2>
+    <p>Build logs, workshop notes, and useful discoveries from the group.</p>
+  </div>
+  <Sketch name="lamp" class="home-lamp" />
+</section>
+</section>
+</SiteLayout>

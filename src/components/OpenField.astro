@@ -1,0 +1,14 @@
+<div class="open-field" data-open-field aria-hidden="true">
+  <img class="open-field-fallback" src="/art/open-field-clear.svg" alt="" width="1300" height="840" fetchpriority="high" decoding="async" />
+  <canvas class="open-field-canvas"></canvas>
+</div>
+
+<style>
+  .open-field { position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden; clip-path:inset(0 0 var(--field-bottom,0px)); }
+  .open-field[data-renderer] { z-index:1; }
+  .open-field-canvas { display:block; width:100%; height:100%; }
+  .open-field-fallback { position:absolute; width:1150px; max-width:none; height:800px; left:50%; top:50%; transform:translate(-50%,-50%); object-fit:contain; opacity:.6; }
+  .open-field[data-renderer] .open-field-fallback { display:none; }
+  @media(max-width:540px) { .open-field-fallback { width:790px; height:680px; opacity:.45; } }
+</style>
+<script>import '../scripts/open-field';</script>
