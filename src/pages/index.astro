@@ -1,4 +1,5 @@
 ---
+import { sitePath } from '../lib/paths';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Sketch from '../components/Sketch.astro';
 import OpenField from '../components/OpenField.astro';
@@ -15,7 +16,7 @@ import { site } from '../data/site';
   <div class="home-copy">
     <h2 id="gather-title">Make things. Together.</h2>
     <p>We’re UT Arlington students learning cloud, trying ideas, and helping each other build.</p>
-    <a class="text-link" href="/events/">See our events <span>↗</span></a>
+    <a class="text-link" href={sitePath('/events/')}>See our events <span>↗</span></a>
   </div>
 </section>
 <section class="home-section home-build chapter" id="build" aria-labelledby="build-title">

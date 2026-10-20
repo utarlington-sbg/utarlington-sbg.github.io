@@ -14,7 +14,7 @@ The large abstract community-photo placeholder belongs only to Home. Events, Blo
 
 ## Static architecture and content boundaries
 
-Astro generates static HTML with trailing slashes. `SiteLayout.astro` supplies metadata, navigation, and the appropriate footer. `src/data/site.ts` owns community links and the optional Home photo. There is no backend or application form. `SITE_URL` is optional until the production origin is selected; deployment assumes the origin root.
+Astro generates static HTML with trailing slashes. `SiteLayout.astro` supplies metadata, navigation, and the appropriate footer. `src/data/site.ts` owns community links and the optional Home photo. There is no backend or application form. `SITE_URL` declares the production origin. `BASE_PATH` defaults to `/` and can be set to `/website/` for GitHub Pages. `src/lib/paths.ts` prefixes internal URLs with Astro's build-time base; compiled CSS and Astro image URLs are rebased by the bundler. CI verifies both root and project-path builds.
 
 `src/content.config.ts` loads Markdown collections using the schemas in `src/lib/schemas.ts`. Blog entries distinguish draft, sample, and published states. Drafts have no public route; sample pages are labeled and use `noindex`; published posts require attribution and a date. The initial story is a sample, not a claim about a real group activity.
 

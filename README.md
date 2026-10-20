@@ -99,7 +99,7 @@ Leaving `homePhoto: null` preserves the approved abstract placeholder. Other pag
 
 This is a static site: deploy the contents of `dist/` to a static host such as AWS Amplify Hosting, Cloudflare Pages, or Netlify. The build command is `npm run build`; the output directory is `dist`. No API keys, database, or external service are needed to render the pages. Hosting has not been configured or published by this implementation.
 
-Set `SITE_URL` to the final public HTTPS origin in the build environment to emit correct canonical and Open Graph URLs. `.env.example` documents the setting. No production domain is assumed. The site is built for an origin root, not a nested repository path. Configure the host to serve `404.html` for unknown URLs.
+Set `SITE_URL` to the final public HTTPS origin in the build environment to emit correct canonical and Open Graph URLs. `.env.example` documents the setting. No production domain is assumed. Set `BASE_PATH=/website/` for the GitHub Pages project URL, or leave it `/` for an origin-root host. Internal links, public assets, and compiled font URLs follow this base. CI verifies both layouts. Configure the host to serve `404.html` for unknown URLs.
 
 ## Sources and assets
 

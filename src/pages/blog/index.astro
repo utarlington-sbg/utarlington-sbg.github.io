@@ -1,4 +1,5 @@
 ---
+import { sitePath } from '../../lib/paths';
 import { getCollection } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import FieldNotesCover from '../../components/FieldNotesCover.astro';
@@ -18,10 +19,10 @@ const [featured, ...others] = posts;
         <article class="blog-preview">
           <div class="eyebrow">{featured.data.status === 'sample' ? 'SAMPLE ARTICLE' : featured.data.category.toUpperCase()}</div>
           <h2>{featured.data.title}</h2><p>{featured.data.summary}</p>
-          <a class="text-link" href={`/blog/${featured.id}/`}>{featured.data.status === 'sample' ? 'Read the sample' : 'Read the story'} <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href={sitePath(`/blog/${featured.id}/`)}>{featured.data.status === 'sample' ? 'Read the sample' : 'Read the story'} <span aria-hidden="true">↗</span></a>
         </article>
       </div>
     ) : <div class="interior-content blog-empty"><FieldNotesCover /><p>Our first field notes are on their way.</p></div>}
-    {others.length > 0 && <section class="interior-content more-posts" aria-label="More field notes">{others.map(post => <a class="history-row" href={`/blog/${post.id}/`}><div><span class="eyebrow">{post.data.status === 'sample' ? 'SAMPLE ARTICLE' : post.data.category.toUpperCase()}</span><h2>{post.data.title}</h2></div><span>Read ↗</span></a>)}</section>}
+    {others.length > 0 && <section class="interior-content more-posts" aria-label="More field notes">{others.map(post => <a class="history-row" href={sitePath(`/blog/${post.id}/`)}><div><span class="eyebrow">{post.data.status === 'sample' ? 'SAMPLE ARTICLE' : post.data.category.toUpperCase()}</span><h2>{post.data.title}</h2></div><span>Read ↗</span></a>)}</section>}
   </section>
 </SiteLayout>

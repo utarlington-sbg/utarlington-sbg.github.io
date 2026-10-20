@@ -1,4 +1,5 @@
 ---
+import { sitePath } from '../lib/paths';
 import Logo from './Logo.astro';
 import { communityLinks, navigation, site } from '../data/site';
 interface Props { home?: boolean }
@@ -7,23 +8,23 @@ const photo: { src: string; alt: string } | null = site.homePhoto;
 ---
 {home ? (
   <footer class="footer" id="home-footer">
-    <div class:list={['footer-art', { 'footer-photo': photo }]} aria-hidden={photo ? undefined : 'true'}><img src={photo?.src ?? '/art/open-field.svg'} alt={photo?.alt ?? ''} loading="lazy" decoding="async" /></div>
+    <div class:list={['footer-art', { 'footer-photo': photo }]} aria-hidden={photo ? undefined : 'true'}><img src={sitePath(photo?.src ?? '/art/open-field.svg')} alt={photo?.alt ?? ''} loading="lazy" decoding="async" /></div>
     {!photo && <span class="footer-placeholder">COMMUNITY PHOTO / PLACEHOLDER</span>}
     <div class="footer-content">
       <p class="footer-credit">{site.fullName}<br />{site.university}</p>
       <div class="footer-links">
-        <nav aria-label="Footer site navigation"><span class="footer-heading">EXPLORE</span>{navigation.map(({ href, label }) => <a href={href}>{label}</a>)}</nav>
-        <nav aria-label="Community links"><span class="footer-heading">FIND US ON</span>{communityLinks.map(({ href, label }) => <a href={href}>{label}</a>)}</nav>
+        <nav aria-label="Footer site navigation"><span class="footer-heading">EXPLORE</span>{navigation.map(({ href, label }) => <a href={sitePath(href)}>{label}</a>)}</nav>
+        <nav aria-label="Community links"><span class="footer-heading">FIND US ON</span>{communityLinks.map(({ href, label }) => <a href={sitePath(href)}>{label}</a>)}</nav>
       </div>
     </div>
   </footer>
 ) : (
   <footer class="interior-footer" id="interior-footer">
-    <a class="footer-brand" href="/" aria-label="AWS at UTA — Home"><Logo /></a>
+    <a class="footer-brand" href={sitePath('/')} aria-label="AWS at UTA — Home"><Logo /></a>
     <p>{site.fullName}<span>{site.university}</span></p>
     <nav aria-label="Footer navigation">
-      <a href="/">Home</a>
-      {communityLinks.map(({ href, label }) => <a href={href}>{label} <span aria-hidden="true">↗</span></a>)}
+      <a href={sitePath('/')}>Home</a>
+      {communityLinks.map(({ href, label }) => <a href={sitePath(href)}>{label} <span aria-hidden="true">↗</span></a>)}
     </nav>
   </footer>
 )}

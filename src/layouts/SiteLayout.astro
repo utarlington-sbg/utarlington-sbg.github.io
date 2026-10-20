@@ -1,4 +1,5 @@
 ---
+import { sitePath } from '../lib/paths';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
@@ -28,8 +29,8 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefin
     <meta name="twitter:card" content="summary" />
     {canonical && <><link rel="canonical" href={canonical} /><meta property="og:url" content={canonical} /></>}
     {noindex && <meta name="robots" content="noindex, follow" />}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preload" href="/fonts/space-grotesk.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="icon" type="image/svg+xml" href={sitePath('/favicon.svg')} />
+    <link rel="preload" href={sitePath('/fonts/space-grotesk.ttf')} as="font" type="font/ttf" crossorigin />
     <title>{title} — {site.name}</title>
   </head>
   <body>

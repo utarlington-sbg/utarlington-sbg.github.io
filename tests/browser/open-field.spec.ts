@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { fieldForms, fieldScrollStops } from '../../src/lib/open-field';
 
 test('particles move automatically without visible motion controls', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('./');
   await page.evaluate(() => document.fonts.ready);
   const field = page.locator('[data-open-field]');
   const canvas = field.locator('canvas');
@@ -17,7 +17,7 @@ test('particles move automatically without visible motion controls', async ({ pa
 test('all eight scroll states produce distinct particle geometry', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/');
+  await page.goto('./');
   await page.evaluate(() => document.fonts.ready);
   await expect(page.locator('[data-open-field]')).toHaveAttribute('data-motion', 'reduced');
   // Remove foreground differences so the comparison measures the particle field.
@@ -41,7 +41,7 @@ test('all eight scroll states produce distinct particle geometry', async ({ page
 
 test('reduced motion stays still and follows system preference changes', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/');
+  await page.goto('./');
   await page.evaluate(() => document.fonts.ready);
   const canvas = page.locator('[data-open-field] canvas');
   await expect(page.locator('[data-open-field]')).toHaveAttribute('data-motion', 'reduced');
@@ -57,7 +57,7 @@ test('reduced motion stays still and follows system preference changes', async (
 test('the final ripple form remains visible above the normal footer', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/');
+  await page.goto('./');
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight - innerHeight, behavior: 'instant' }));
   await expect(page.locator('[data-open-field]')).toHaveAttribute('data-field-state', 'echo');
@@ -78,7 +78,7 @@ test('the background still moves when WebGL is unavailable', async ({ page }) =>
       },
     });
   });
-  await page.goto('/');
+  await page.goto('./');
   await page.evaluate(() => document.fonts.ready);
   await expect(page.locator('[data-open-field]')).toHaveAttribute('data-renderer', 'canvas2d');
   const canvas = page.locator('[data-open-field] canvas');
@@ -88,7 +88,7 @@ test('the background still moves when WebGL is unavailable', async ({ page }) =>
 });
 
 test('losing a graphics context recovers with a moving 2D field', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('./');
   const field = page.locator('[data-open-field]');
   await expect(field).toHaveAttribute('data-renderer', 'webgl');
   await field.locator('canvas').evaluate(canvas => {
