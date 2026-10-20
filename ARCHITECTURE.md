@@ -42,7 +42,7 @@ Run the commands in [README.md](README.md). Content tests cover schema validity,
 
 Motion tests inspect rendered pixels across all eight states, continuous motion, reduced motion and preference changes, Canvas 2D fallback, WebGL context loss, and final-state visibility at the footer. A renderer attribute alone does not prove the background is visible. The optional capture script writes galleries and recordings into ignored local research folders; it is not needed to serve the site.
 
-Playwright launches its preview with `--ignore-lock` to keep Astro in the foreground, including in agent environments that otherwise auto-background previews. Playwright must own the test-server lifecycle; an existing local preview must not substitute for a clean CI build.
+Playwright invokes the installed Astro CLI directly with a single explicit `--host 127.0.0.1` matching its readiness URL. The npm preview script already supplies `--host`; appending another makes Astro discard the address and can leave CI polling the wrong loopback interface. The test command also uses `--ignore-lock` to keep Astro in the foreground, including in agent environments that otherwise auto-background previews. Playwright must own the test-server lifecycle; an existing local preview must not substitute for a clean CI build.
 
 CI installs pinned npm dependencies, checks Astro/TypeScript, builds static pages, installs Chromium, and runs both test suites. Generated output, dependencies, environment secrets, reports, and local design research are ignored. Keep essential decisions in tracked documentation rather than linking to ignored screenshots or prototypes.
 
