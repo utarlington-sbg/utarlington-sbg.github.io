@@ -1,0 +1,16 @@
+---
+import { Image } from 'astro:assets';
+import cat from '../assets/sketches/ethernet-cat.png';
+import crane from '../assets/sketches/disk-crane.png';
+import robot from '../assets/sketches/cloud-tinkerer.png';
+import lamp from '../assets/sketches/circuit-lamp.png';
+import cloud from '../assets/sketches/cloud-cable.png';
+import notebook from '../assets/sketches/notebook-sprout.png';
+
+const sketches = { cat, crane, robot, lamp, cloud, notebook };
+interface Props { name: keyof typeof sketches; class: string }
+const { name, class: className } = Astro.props;
+---
+<div class:list={['margin-sketch', className]} aria-hidden="true">
+  <Image src={sketches[name]} alt="" width={540} widths={[180, 360, 540]} sizes="(max-width: 800px) 140px, 230px" format="webp" quality={80} loading="lazy" decoding="async" />
+</div>
