@@ -695,14 +695,16 @@ h1 em,h2 em {
 }
 
 .header {
-  transition:transform .22s ease,opacity .18s ease;
+  visibility:visible;
+  transition:transform .22s ease,opacity .18s ease,visibility 0s linear;
   will-change:auto
 }
 
 .header.scroll-hidden {
   transform:translateY(calc(-100% - 40px));
   opacity:0;
-  visibility:hidden
+  visibility:hidden;
+  transition-delay:0s,0s,.22s
 }
 
 .header.scroll-hidden .brand,.header.scroll-hidden nav {
