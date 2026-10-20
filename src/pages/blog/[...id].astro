@@ -1,0 +1,25 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+export async function getStaticPaths() {
+  return (await getCollection('blog', ({ data }) => data.status !== 'draft')).map(post => ({ params: { id: post.id }, props: { post } }));
+}
+interface Props { post: CollectionEntry<'blog'> }
+const { post } = Astro.props;
+const { Content } = await render(post);
+const isSample = post.data.status === 'sample';
+---
+<SiteLayout title={post.data.title} description={post.data.summary} noindex={isSample}>
+  <article class="reading-page">
+    <a class="text-link reading-back" href="/blog/">← All field notes</a>
+    <header>
+      <div class="eyebrow">{isSample ? 'SAMPLE ARTICLE' : post.data.category.toUpperCase()}</div>
+      <h1>{post.data.title}</h1>
+      {post.data.status === 'published' && <p class="article-byline">{post.data.author} · <time datetime={post.data.publishedAt}>{new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(post.data.publishedAt))}</time></p>}
+      <p class="article-deck">{post.data.summary}</p>
+    </header>
+    <div class="prose"><Content /></div>
+    {isSample && <aside class="sample-notice">This is sample editorial copy for reviewing the reading experience, not a published group article.</aside>}
+  </article>
+</SiteLayout>
