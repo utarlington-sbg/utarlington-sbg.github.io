@@ -62,7 +62,7 @@ Write the post here in Markdown.
 
 The date above is only a format example; use the actual publication date. Categories are `Build log`, `Workshop notes`, `Guide`, and `Community`. Use `status: draft` while writing; drafts appear in neither the index nor generated routes. Published posts require an author and publication date. `status: sample` is reserved for clearly marked demonstration copy.
 
-The existing **The first useful version** is the approved sample, not a real published group story. Replace it with approved editorial content before a public launch, or remove the file; an empty-state layout is provided.
+The existing **The first useful version** is the approved sample, not a real published group story. Replace it with the group’s first approved story when ready, or remove the file; an empty-state layout is provided.
 
 ## Add a scheduled event
 
@@ -97,9 +97,24 @@ Leaving `homePhoto: null` preserves the approved abstract placeholder. Other pag
 
 ## Build and host
 
-This is a static site: deploy the contents of `dist/` to a static host such as AWS Amplify Hosting, Cloudflare Pages, or Netlify. The build command is `npm run build`; the output directory is `dist`. No API keys, database, or external service are needed to render the pages. Hosting has not been configured or published by this implementation.
+The public site is hosted at [utarlington-sbg.github.io/website/](https://utarlington-sbg.github.io/website/) using GitHub Pages. The GitHub Actions workflow checks types, builds, and runs content/browser tests at both `/` and `/website/`. On `main`, it uploads the exact tested `/website/` build and deploys it only after both variants pass. Pull requests and feature branches verify without publishing. No deployment secrets or external hosting account are required.
 
-Set `SITE_URL` to the final public HTTPS origin in the build environment to emit correct canonical and Open Graph URLs. `.env.example` documents the setting. No production domain is assumed. Set `BASE_PATH=/website/` for the GitHub Pages project URL, or leave it `/` for an origin-root host. Internal links, public assets, and compiled font URLs follow this base. CI verifies both layouts. Configure the host to serve `404.html` for unknown URLs.
+Merge a reviewed PR into `main` to publish an update. To rebuild time-sensitive event state without a source change, run **Verify and publish website** from the Actions tab on `main`, or use:
+
+```sh
+gh workflow run ci.yml --ref main
+```
+
+Production builds use `SITE_URL=https://utarlington-sbg.github.io` and `BASE_PATH=/website/`, configured in `.github/workflows/ci.yml`. The browser suite verifies canonical URLs, internal links, and actual public asset responses. Failed checks leave the existing deployment in place. The custom `404.html` is served by GitHub Pages for unknown project URLs.
+
+To reproduce the deployed layout locally:
+
+```sh
+BASE_PATH=/website/ SITE_URL=https://utarlington-sbg.github.io npm run build
+BASE_PATH=/website/ npm run preview
+```
+
+Open `/website/` on the preview server. For an origin-root host, use `BASE_PATH=/` and set `SITE_URL` to that origin. A future custom domain requires updating Pages/DNS settings and the production origin, base, and artifact-selection condition in the workflow together. Static output remains in `dist/`; no API keys, database, or backend are needed.
 
 ## Sources and assets
 
