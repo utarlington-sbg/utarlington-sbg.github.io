@@ -1,0 +1,14 @@
+---
+import Logo from './Logo.astro';
+import { navigation, site } from '../data/site';
+const path = Astro.url.pathname;
+---
+<header class="header" data-header>
+  <a class="brand" href="/" aria-label="AWS at UTA — Home"><Logo /></a>
+  <nav aria-label="Main navigation">
+    {navigation.map(({ href, label }) => (
+      <a href={href} aria-current={href === '/' ? path === '/' ? 'page' : undefined : path.startsWith(href) ? 'page' : undefined}>{label}</a>
+    ))}
+    <a href={site.links.meetup}>Meetup <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
