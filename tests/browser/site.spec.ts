@@ -158,3 +158,15 @@ test('internal navigation and public assets use the deployment base', async ({ p
   }
   expect(failedResources).toEqual([]);
 });
+
+
+test('the former project landing redirects to the root without JavaScript', async ({ browser, baseURL }) => {
+  if (!baseURL) throw new Error('A production preview base URL is required');
+  test.skip(new URL(baseURL).pathname !== '/', 'The legacy redirect belongs to the root deployment');
+  const context = await browser.newContext({ baseURL, javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto('website/');
+  await expect(page).toHaveURL(baseURL);
+  await expect(page.locator('h1')).toContainText('A place for');
+  await context.close();
+});
