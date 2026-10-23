@@ -1307,7 +1307,15 @@ h1 em,h2 em {
 .upcoming-events { margin-bottom: 45px; }
 .upcoming-events > h2 { font-size: 26px; }
 .history-row p { font-size: 14px; color: var(--muted); margin: 12px 0 0; }
-.footer-photo img { object-fit: cover; }
+.footer:has(.footer-photo) .footer-content { margin-top: auto; }
+.footer-photo { background: #4a2fb0; }
+.footer-photo img, .footer-photo canvas { position: absolute; inset: 0; left: 0; top: 0; width: 100%; height: 100%; }
+.footer-photo img { object-fit: cover; object-position: 50% 38%; opacity: 1; filter: grayscale(1) contrast(1.3); mix-blend-mode: luminosity; }
+.footer-photo canvas { display: none; image-rendering: pixelated; }
+.footer-photo[data-renderer] img { visibility: hidden; }
+.footer-photo[data-renderer] canvas { display: block; }
+.footer-photo:after { background: linear-gradient(to bottom, var(--field), transparent 30%, transparent 55%, #171225b3); background-size: 100% 100%; }
+.footer-photo[data-renderer]:after { background: linear-gradient(to top, #171225b3, transparent 45%); }
 @media (max-width: 540px) {
   .reading-page { padding: 100px 7% 70px; }
   .reading-back { margin-bottom: 35px; }

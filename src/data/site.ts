@@ -21,7 +21,10 @@ export const site: SiteSettings = {
     discord: 'https://discord.gg/cz74RYhEDQ',
     community: 'https://linktr.ee/utaaws',
   },
-  homePhoto: null,
+  homePhoto: {
+    src: '/photos/team.jpg',
+    alt: 'Six members of the AWS Student Builder Group standing together on campus in matching purple Cloud Clubs shirts',
+  },
 };
 
 export const navigation = [

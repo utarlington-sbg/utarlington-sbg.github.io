@@ -8,7 +8,7 @@ const photo: { src: string; alt: string } | null = site.homePhoto;
 ---
 {home ? (
   <footer class="footer" id="home-footer">
-    <div class:list={['footer-art', { 'footer-photo': photo }]} aria-hidden={photo ? undefined : 'true'}><img src={sitePath(photo?.src ?? '/art/open-field.svg')} alt={photo?.alt ?? ''} loading="lazy" decoding="async" /></div>
+    <div class:list={['footer-art', { 'footer-photo': photo }]} aria-hidden={photo ? undefined : 'true'}><img src={sitePath(photo?.src ?? '/art/open-field.svg')} alt={photo?.alt ?? ''} loading="lazy" decoding="async" />{photo && <canvas aria-hidden="true"></canvas>}</div>
     {!photo && <span class="footer-placeholder">COMMUNITY PHOTO / PLACEHOLDER</span>}
     <div class="footer-content">
       <p class="footer-credit">{site.fullName}<br />{site.university}</p>
@@ -28,3 +28,4 @@ const photo: { src: string; alt: string } | null = site.homePhoto;
     </nav>
   </footer>
 )}
+<script>import '../scripts/footer-dither';</script>
